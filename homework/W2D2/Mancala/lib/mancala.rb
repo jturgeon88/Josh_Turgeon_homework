@@ -62,3 +62,7 @@ class Mancala
     puts " 1   2   3   4   5   6"
   end
 end
+
+if $0 == __FILE__
+  Mancala.new("Josh", "Lizzy").play
+end
