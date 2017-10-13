@@ -54,7 +54,8 @@ describe Dessert do
     end
 
     it "raises an error if the amount is greater than the quantity" do
-      expect(cake.quantity).to eq(2)
+      cake.eat(6)
+      expect {cake.eat(6)}.to eq(2)
     end
   end
 
