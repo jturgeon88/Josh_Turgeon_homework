@@ -12,11 +12,11 @@ class BooksController < ApplicationController
 
   def create
     # your code here
-    new_book = Book.new(given_paramaters)
-    if new_book.save 
+    book = Book.new(params)
+    if book.save 
       redirect_to books_url
     else 
-      flash.now[:errors] = new_book.full_messages
+      flash.now[:errors] = book.full_messages
       new
     end 
 
@@ -24,8 +24,8 @@ class BooksController < ApplicationController
 
   def destroy
     # your code here
-    new_book = Book.find(params[:id])
-    new_book.destroy
+    book = Book.find(params[:id])
+    book.destroy
     redirect_to books_url
   end
 
