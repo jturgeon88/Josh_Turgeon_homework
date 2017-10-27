@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <%= yield %>
+    <p>Other content for the cats index goes here</p>
+
+    <% content_for :footer do %>
+      <p>This is the cats index page.</p>
+    <% end %>
+  </body>
+</html>
