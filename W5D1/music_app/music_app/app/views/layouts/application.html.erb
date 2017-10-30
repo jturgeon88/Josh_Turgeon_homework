@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MusicApp</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+  <header>
+    MUSIC APP
+  </header>
+  <body>
+      <nav class="main-nav">
+        <h1>
+          <% if logged_in? %>
+          <%= link_to "sign in", new_session_url %></h1>
+          <% else %>
+          <%= link_to "sign up", new_user_url %>
+          <% end %>
+        </h1>
+
+      </nav>
+
+    <%= yield %>
+  </body>
+</html>
