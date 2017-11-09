@@ -51,7 +51,7 @@ herd.forEach(Elephant.paradeHelper);
 
 // Phase IV
 
-function dinerBreakfast(food) {
+function dinerBreakfast() {
   let order = "I'd like cheesy scrambled eggs please.";
   console.log(order);
 
