@@ -2977,22 +2977,43 @@ var _root2 = _interopRequireDefault(_root);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var addLoggingToDispatch = function addLoggingToDispatch(store) {
-  var disp = store.dispatch;
-  return function (action) {
-    console.log(store.getState());
-    console.log(action);
-    disp(action);
-    console.log(store.getState());
-  };
-};
+//PHASE 1:
+
+// const addLoggingToDispatch = (store) => {
+//   const disp = store.dispatch;
+//   return (action) => {
+//     console.log(store.getState());
+//     console.log(action);
+//     disp(action);
+//     console.log(store.getState());
+//   }
+// }
+
+// PHASE 2:
+// const addLoggingToDispatch = store => next => action => {
+//   console.log(store.getState());
+//   console.log(action);
+//   next(action);
+//   console.log(store.getState());
+// }
+
+// const applyMiddlewares = (store, ...middlewares) => {
+//   let dispatch = store.dispatch;
+//   middlewares.forEach(middleware => dispatch = middleware(store)(dispatch));
+//   return Object.assign({}, store, { dispatch });
+//
+//
+// }
 
 document.addEventListener('DOMContentLoaded', function () {
   var preloadedState = localStorage.state ? JSON.parse(localStorage.state) : {};
   var store = (0, _store2.default)(preloadedState);
 
   //Phase 1: Logging
-  store.dispatch = addLoggingToDispatch(store);
+  // store.dispatch = addLoggingToDispatch(store);
+
+  //Phase 2: Refactoring
+  // store = applyMiddlewares(store, addLoggingToDispatch);
 
   var root = document.getElementById('content');
   _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
@@ -20306,10 +20327,21 @@ var _root_reducer2 = _interopRequireDefault(_root_reducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var addLoggingToDispatch = function addLoggingToDispatch(store) {
+  return function (next) {
+    return function (action) {
+      console.log(store.getState());
+      console.log(action);
+      next(action);
+      console.log(store.getState());
+    };
+  };
+};
+
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  var store = (0, _redux.createStore)(_root_reducer2.default, preloadedState);
+  var store = (0, _redux.createStore)(_root_reducer2.default, preloadedState, (0, _redux.applyMiddleware)(addLoggingToDispatch));
   store.subscribe(function () {
     localStorage.state = JSON.stringify(store.getState());
   });
