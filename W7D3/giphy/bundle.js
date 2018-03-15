@@ -6945,9 +6945,9 @@ if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' 
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
-exports.fetchSearchGiphys = exports.receiveSearchGiphys = exports.REQUEST_SEARCH_GIPHYS = exports.RECEIVE_SEARCH_GIPHYS = undefined;
+exports.receiveSearchGiphys = exports.fetchSearchGiphys = exports.REQUEST_SEARCH_GIPHYS = exports.RECEIVE_SEARCH_GIPHYS = undefined;
 
 var _api_util = __webpack_require__(115);
 
@@ -6958,19 +6958,19 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var RECEIVE_SEARCH_GIPHYS = exports.RECEIVE_SEARCH_GIPHYS = 'RECEIVE_SEARCH_GIPHYS';
 var REQUEST_SEARCH_GIPHYS = exports.REQUEST_SEARCH_GIPHYS = 'REQUEST_SEARCH_GIPHYS';
 
-var receiveSearchGiphys = exports.receiveSearchGiphys = function receiveSearchGiphys(giphys) {
-  return {
-    type: RECEIVE_SEARCH_GIPHYS,
-    giphys: giphys
-  };
+var fetchSearchGiphys = exports.fetchSearchGiphys = function fetchSearchGiphys(searchTerm) {
+	return function (dispatch) {
+		return APIUtil.fetchSearchGiphys(searchTerm).then(function (giphys) {
+			return dispatch(receiveSearchGiphys(giphys.data));
+		});
+	};
 };
 
-var fetchSearchGiphys = exports.fetchSearchGiphys = function fetchSearchGiphys(searchTerm) {
-  return function (dispatch) {
-    APIUtil.fetchSearchGiphys(searchTerm).then(function (giphys) {
-      return dispatch(receiveSearchGiphys(giphys.data));
-    });
-  };
+var receiveSearchGiphys = exports.receiveSearchGiphys = function receiveSearchGiphys(giphys) {
+	return {
+		type: RECEIVE_SEARCH_GIPHYS,
+		giphys: giphys
+	};
 };
 
 /***/ }),
@@ -12092,7 +12092,7 @@ var _root_reducer2 = _interopRequireDefault(_root_reducer);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var configureStore = function configureStore() {
-  return (0, _redux.createStore)(_root_reducer2.default);
+  return (0, _redux.createStore)(_root_reducer2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default));
 };
 
 exports.default = configureStore;
@@ -12203,8 +12203,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 document.addEventListener('DOMContentLoaded', function () {
   var store = (0, _store2.default)();
   window.store = store;
-  window.fetchSearchGiphys = APIUtil.fetchSearchGiphys;
-  window.receiveSearchGiphys = GiphyActions.receiveSearchGiphys;
+  window.fetchSearchGiphys = GiphyActions.fetchSearchGiphys;
 });
 
 /***/ }),

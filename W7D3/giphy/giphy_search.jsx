@@ -9,6 +9,5 @@ import * as GiphyActions from './actions/giphy_actions';
 document.addEventListener('DOMContentLoaded', () => {
   const store = configureStore();
   window.store = store;
-  window.fetchSearchGiphys = APIUtil.fetchSearchGiphys;
-  window.receiveSearchGiphys = GiphyActions.receiveSearchGiphys;
+  window.fetchSearchGiphys = GiphyActions.fetchSearchGiphys;
 });
