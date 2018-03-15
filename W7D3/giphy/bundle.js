@@ -12056,6 +12056,10 @@ module.exports = g;
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _react = __webpack_require__(17);
 
 var _react2 = _interopRequireDefault(_react);
@@ -12067,6 +12071,22 @@ var _giphys_search_container = __webpack_require__(111);
 var _giphys_search_container2 = _interopRequireDefault(_giphys_search_container);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Root = function Root(_ref) {
+  var store = _ref.store;
+
+  return _react2.default.createElement(
+    _reactRedux.Provider,
+    { store: store },
+    _react2.default.createElement(
+      'div',
+      null,
+      'Hey nowwww'
+    )
+  );
+};
+
+exports.default = Root;
 
 /***/ }),
 /* 106 */
@@ -12188,22 +12208,12 @@ var _root = __webpack_require__(105);
 
 var _root2 = _interopRequireDefault(_root);
 
-var _api_util = __webpack_require__(115);
-
-var APIUtil = _interopRequireWildcard(_api_util);
-
-var _giphy_actions = __webpack_require__(58);
-
-var GiphyActions = _interopRequireWildcard(_giphy_actions);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 document.addEventListener('DOMContentLoaded', function () {
-  var store = (0, _store2.default)();
-  window.store = store;
-  window.fetchSearchGiphys = GiphyActions.fetchSearchGiphys;
+	var store = (0, _store2.default)();
+	var root = document.getElementById('root');
+	_reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 });
 
 /***/ }),
