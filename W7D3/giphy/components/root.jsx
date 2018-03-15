@@ -7,8 +7,7 @@ const Root = ({ store }) => {
   return (
     <Provider store={store}>
       <div>
-        Hey nowwww
-
+        <GiphysSearchContainer/>
       </div>
     </Provider>
   );
